@@ -1,0 +1,18 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF8"/>
+    <title>Plotly</title>
+    <script>
+        function goBack() {
+          window.history.back()
+        }
+    </script>
+</head>
+<body>
+    <h1>Here is your graph!</h1>
+    {{plot_div | safe}}
+    <button onclick="goBack()">Go Back</button>
+</body>
+</html>

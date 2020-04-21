@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF8"/>
+    <title>Hotels Results</title>
+    <script>
+        function goBack() {
+          window.history.back()
+        }
+    </script>
+</head>
+<body>
+    <h1>Here are the results of nearby restaurants sorted by {{sort}} in {{order}} order!</h1>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Rating</th>
+            <th>AvgPrice</th>
+            <th>Distance</th>
+            <th>Link</th>
+        </tr>
+        {% for row in results %}
+        <tr>
+            <td>{{row[0]}}</td>
+            <td>{{row[1]}}</td>
+            <td>{{row[2]}}</td>
+            <td>{{row[3]}}</td>
+            <td>{{row[4]}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <button onclick="goBack()">Go Back</button>
+</body>
+</html>

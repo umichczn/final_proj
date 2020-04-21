@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF8"/>
+    <title>Best Hotels in USA!</title>
+</head>
+<body>
+    <h1>Best Hotels in USA!</h1>
+    <form action='/results' method='POST'>
+    <p>
+    Sort by: 
+        <input type='radio' name='sort' value='rating' checked='checked'/> Rating 
+        <input type='radio' name='sort' value='price'/> Price
+        <input type='radio' name='sort' value='distance'/> Distance
+    </p>
+    <p>
+    Sort direction: 
+        <input type='radio' name='dir'value='desc' checked='checked'/>High to Low
+        <input type='radio' name='dir'value='asc'/>Low to High
+    </p>
+    <p>
+        <input type='checkbox' name='plot'/>Plot results
+    </p>
+
+    <table>
+
+        <tr>
+            <th>Hotel Id</th>
+            <th>Hotel Name</th>
+            <th>City</th>
+            <th>State</th>
+        </tr>
+        {% for row in results %}
+        <tr>
+            <td><input type='radio' name='hotel' value={{row[0]}} checked='checked'/> {{row[0]}}</td>
+            <td>{{row[1]}}</td>
+            <td>{{row[2]}}</td>
+            <td>{{row[3]}}</td>
+        </tr>
+        {% endfor %}
+    </table>>
+
+
+    <input type='submit' value='Get Result'/>
+    </form>
+</body>
+</html>
