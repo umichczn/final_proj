@@ -16,6 +16,47 @@ CACHE_FILE_NAME = 'cache.json'
 API_KEY = secrets.API_KEY
 
 
+def creat_db():
+    '''create a database connection to the SQLite database
+    specified by "Final_Project.db". And create two tables in the db.
+
+    Parameters
+    ----------
+    None
+    
+    Returns
+    -------
+    None
+
+    '''
+    connection = sqlite3.connect("Final_Project.db")
+    cursor = connection.cursor()
+    query1 = '''CREATE TABLE IF NOT EXISTS Hotels (
+	Id	INTEGER NOT NULL,
+	HotelName	TEXT,
+	HotelCity	TEXT,
+	HotelState	TEXT,
+	Latitude	TEXT,
+	Longitude	TEXT,
+	PRIMARY KEY(Id));
+    '''
+    cursor.execute(query1)
+    connection.commit()
+
+    query2 = '''CREATE TABLE IF NOT EXISTS Restaurants (
+	Id	INTEGER NOT NULL,
+	Name	TEXT,
+	HotelId	INTEGER,
+	Rating	TEXT,
+	AvgPrice	TEXT,
+	Distance	REAL,
+	Link	TEXT,
+	FOREIGN KEY(HotelId) REFERENCES Hotels(Id));
+    '''
+    cursor.execute(query2)
+    connection.commit()
+    connection.close()
+
 
 #--------Scraping a web page and store data into sqlite--------#
  
@@ -182,11 +223,11 @@ def insert_restaurants_database(id):
 
 
 if __name__ == "__main__":
-    #data part
-
+    
+    creat_db()
     hotels_list = get_hotels_list(HOTELS_URL)
     insert_hotels_database(hotels_list)
     for i in range(1, len(hotels_list) + 1):
         insert_restaurants_database(i)
     
-    #presentation part still in process
+    
